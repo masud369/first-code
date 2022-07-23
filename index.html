@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curise Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container" id="d-none">
+
+        <div class="booking-content">
+            <h1>Cruise Queen</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book./p>
+        </div>
+
+
+        <div class="booking-form">
+            <h3>Book Ocean Time</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                        <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class ($150)</label>
+                    <input class="inp-style inp-width" id="firstcls-value" type="number" name="">
+                </div>
+                <div class="plus-minus-btn">
+                    <p style="display: flex;"><span id="firstcls-increment"
+                            style="margin:10px;cursor: pointer;">+</span> <span id="firstcls-decrement"
+                            style="margin:10px;cursor: pointer;">-</span> </p>
+                </div>
+            </div>
+
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy ($100)</label>
+                    <input class="inp-style inp-width" id="economy-value" type="number" name="">
+                </div>
+                <div class="plus-minus-btn">
+                    <p style="display: flex;"><span id="economy-increment" style="margin:10px;cursor: pointer;">+</span>
+                        <span id="economy-decrement" style="margin:10px;cursor: pointer;">-</span>
+                    </p>
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="subtotal">000</span></p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="tax">00</span></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="total">000</span></p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style" style="cursor:pointer;" id="book-now">Book Now</button>
+        </div>
+    </main>
+    <div id="booking-info" style="margin: 10%;visibility: hidden;font-size: 50px; color: yellow;"> 
+        <h2>masud</h2>
+    </div>
+
+    <!--Thank You-->
+    <!-- JAVASCRIPT CODE  -->
+    <script>
+        // First calss inrement handelar
+        var firstClsCount = 0;
+        document.getElementById("firstcls-increment").addEventListener("click", function () {
+            firstClsCount++;
+            document.getElementById("firstcls-value").value = firstClsCount;
+            subTotl();
+        });
+        // First calss decrement handelar
+        document.getElementById("firstcls-decrement").addEventListener("click", function () {
+            firstClsCount--;
+            if (firstClsCount>=0) {
+                document.getElementById("firstcls-value").value = firstClsCount;
+                subTotl();
+            }
+            if(firstClsCount<0){
+                firstClsCount = 0;
+            }
+        });
+        // economy calss inrement handelar
+        var economyClsCount = 0;
+        document.getElementById("economy-increment").addEventListener("click", function () {
+            economyClsCount++;
+            document.getElementById("economy-value").value = economyClsCount;
+            subTotl();
+        });
+        // Economy calss decrement handelar
+        document.getElementById("economy-decrement").addEventListener("click", function () {
+            economyClsCount--;
+            if (economyClsCount>=0) {
+                document.getElementById("economy-value").value = economyClsCount;
+                subTotl();
+            }
+            if(economyClsCount<0){
+                economyClsCount = 0;
+            }
+        });
+        //subTotal 
+        function subTotl() {
+            let firstClsPrice = document.getElementById("firstcls-value").value * 150;
+            let economyClsPrice = document.getElementById("economy-value").value * 100;
+            let subTotal =  document.getElementById("subtotal").innerText = Number(firstClsPrice) + Number(economyClsPrice);
+            //tax
+            let tax = document.getElementById("tax").innerText = Number(subTotal)*.10;
+            //total
+            document.getElementById("total").innerText = Number(subTotal)+Number(tax);
+
+        }
+        //book-now
+        document.getElementById("book-now").addEventListener("click",function(){
+            document.getElementById("d-none").style.display = "none";
+            document.getElementById("booking-info").style.visibility = "visible";
+            let firsstClassTkit =  document.getElementById("firstcls-value").value;
+            let firstClsPrice = firsstClassTkit*150;
+            let firstClsTax = firstClsPrice*.10;
+            let economyClassTkit =  document.getElementById("economy-value").value;
+            let economyClsPrice = firsstClassTkit*100;
+            let economyClsTax = economyClsPrice*.10;
+            let total = document.getElementById("total").innerText;
+            document.getElementById("booking-info").innerText = `
+                Your Business class = ${firsstClassTkit} pic,  $${firstClsPrice} + tax 10% : $${firstClsTax} and 
+                Your Economy class = ${economyClassTkit} pic, $${economyClsPrice} + tax 10% : $${economyClsTax} is confirmed!
+                total: $${total}.
+            `;
+            
+
+        });
+
+        
+
+
+
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>
